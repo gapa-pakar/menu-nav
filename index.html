@@ -5,40 +5,295 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Menu</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #4e6cef;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --background-color: #fff;
+            --dropdown-background-color: #eee;
+            --dropdown-hover-color: rgba(78, 108, 239, 0.1);
+            --active-bg-color: rgba(78, 108, 239, 0.1);
+            --active-text-color: #4e6cef;
+        }
+
+        @font-face {
+            font-family: "Assistant";
+            src: url(assets/fonts/Assistant/Assistant-Regular.ttf);
+        }
+
+        body {
+            font-family: "Assistant";
+            background-color: #e0f7fa;
+            margin: 0;
+            font-size: calc(1vw + 1vh + 8px);
+        }
+
+        .sidebar {
+            width: 23rem;
+            background-color: var(--background-color);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            right: 0;
+            top: 4rem;
+            display: none; /* Initially hidden */
+            /* padding: 0.5rem; */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            position: relative;
+            /* display: flex; */
+            flex-direction: row-reverse;
+            border: 1px solid var(--border-color); /* Border around each item */
+            border-radius: 0.3rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            justify-content: flex-end; /* Align content to the right */
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.9rem;
+            direction: rtl;
+        }
+
+        .disabled {
+            color: grey;
+            cursor: default;
+        }
+
+        .enabled {
+            color: black;
+            cursor: pointer;
+        }
+
+        .disabled, .enabled {
+            font-size: 1rem;
+        }
+
+        .enabled:hover {
+            background-color: lightblue;
+            color: blue;
+        }
+
+        .icon {
+            width: 3rem;
+            /* margin-left: 0.5rem; */
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s;
+            margin-left: 1rem;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .dropdown.active .dropdown-icon {
+            transform: rotate(90deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            background-color: var(--dropdown-background-color);
+            flex-direction: column;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: flex;
+            position: static;
+        }
+
+        .dropdown-menu a {
+            padding-left: 2rem;
+            justify-content: flex-start;
+            font-size: 0.85rem;
+        }
+
+        /* Menu button styling */
+        .menu-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            cursor: pointer;
+        }
+
+        .clock-icon {
+            position: absolute;
+            right: 1.5rem;
+            width: 2.5rem;
+        }
+
+        .target-icon {
+            position: absolute;
+            right: 1rem;
+        }
+
+        .building-icon {
+            position: absolute;
+            right: 1.7rem;
+            width: 2rem;
+        }
+
+        #menu-nav-page-3 {
+            right: 4.2rem;
+        }
+
+        #menu-nav-page-3, 
+        #menu-nav-page-22, 
+        #menu-nav-page-37 {
+            position: absolute;
+            right: 5rem;
+        }
+
+    </style>
 </head>
 <body>
-    <nav class="sidebar">
+    <img src="assets/images/menu-btn.svg" alt="Menu Button" class="menu-btn" id="menu-btn">
+    <nav class="sidebar" id="sidebar">
         <ul>
             <li class="dropdown">
-                <a href="#"><i class="material-icons dropdown-icon">chevron_left</i> <span>Dashboard</span> <i class="material-icons">dashboard</i></a>
+                <a href="#"><img src="assets/images/clock-icon.svg" alt="clock icon" class="icon clock-icon"><span id="menu-nav-page-3">ציר זמן- מפלח''ץ לחטיבת החילוץ וההדרכה</span><span class="dropdown-icon">▼</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="material-icons">analytics</i> <span>Analytics</span></a></li>
-                    <li><a href="#"><i class="material-icons">assessment</i> <span>Reports</span></a></li>
-                    <li><a href="#"><i class="material-icons">insights</i> <span>Insights</span></a></li>
+                    <li id="menu-nav-page-4">1992- הקמת פיקוד העורף</li>
+                    <li id="menu-nav-page-5">2003- הקמת פלוגת החילוץ הראשונה- פלוגת 'שביט'</li>
+                    <li id="menu-nav-page-6">2004- הקמת פלוגת 'חץ' ופלוגת 'רותם'</li>
+                    <li id="menu-nav-page-7">2008- איחוד פלוגות החילוץ והקמת גדוד שחר</li>
+                    <li id="menu-nav-page-8">2009- הקמת גדוד קדם</li>
+                    <li id="menu-nav-page-9">2011- המעבר ממג''ל לפקע''ר</li>
+                    <li id="menu-nav-page-10">2012- הקמת גדוד תבור</li>
+                    <li id="menu-nav-page-11">2012- הקמת גדוד רם</li>
+                    <li id="menu-nav-page-12">2013- הקמת הנפה הסדירה</li>
+                    <li id="menu-nav-page-15">1952- בה"ד 16</li>
+                    <li id="menu-nav-page-16">2016- איחוד בה"ד 16 והנפה הסדירה</li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#"><i class="material-icons dropdown-icon">chevron_left</i> <span>Customers</span> <i class="material-icons">people</i></a>
+                <a href="#"><img src="assets/images/target-icon.svg" alt="target icon" class="icon target-icon"><span id="menu-nav-page-22">ייעוד ותפקידים</span><span class="dropdown-icon">▼</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="material-icons">star</i> <span>Badges</span></a></li>
-                    <li><a href="#"><i class="material-icons">receipt</i> <span>Customers Logs</span></a></li>
-                    <li><a href="#"><i class="material-icons">card_giftcard</i> <span>Gift Vouchers</span></a></li>
+                    <li id="menu-nav-page-23">ייעוד החטיבה</li>
+                    <li id="menu-nav-page-24">תפקידי החטיבה בשגרה ובחירום</li>
+                    <li id="menu-nav-page-25">תפקידים מרכזיים- מפקדה משימתית- טורקיה</li>
+                    <li id="menu-nav-page-26">תפקידים מרכזיים- מפקדה משימתית- קורונה</li>
+                    <li id="menu-nav-page-27">תפקידים מרכזיים- חילוץ בעורף</li>
+                    <li id="menu-nav-page-28">תפקידים מרכזיים- חילוץ בסיוע לתמרון</li>
+                    <li id="menu-nav-page-30">תפקידים מרכזיים- אב''כ</li>
+                    <li id="menu-nav-page-31">תפקידים מרכזיים- בט''ש</li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#"><i class="material-icons dropdown-icon">chevron_left</i> <span>File</span> <i class="material-icons">folder</i></a>
+                <a href="#"><img src="assets/images/building-icon.svg" alt="building icon" class="icon building-icon"><span id="menu-nav-page-37">מבנה החטיבה</span><span class="dropdown-icon">▼</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="material-icons">description</i> <span>Documents</span></a></li>
-                    <li><a href="#"><i class="material-icons">cloud_upload</i> <span>Uploads</span></a></li>
-                    <li><a href="#"><i class="material-icons">archive</i> <span>Archives</span></a></li>
+                    <li id="menu-nav-page-hativa">מפקדת חטיבת החילוץ וההדרכה</li>
+                    <li id="menu-nav-page-bah">בא''ח העורף</li>
+                    <li id="menu-nav-page-school">ביה''ס לפיקוד ומקצועות העורף</li>
+                    <li id="menu-nav-page-baf">בא''פ העורף</li>
+                    <li id="menu-nav-page-matachim">יחידת מתכים</li>
+                    <li id="menu-nav-page-gdudim">גדודי החטיבה</li>
                 </ul>
             </li>
-            <li><a href="#"><i class="material-icons">account_balance_wallet</i> <span>Wallet</span></a></li>
-            <li><a href="#"><i class="material-icons">bar_chart</i> <span>Reporting</span></a></li>
-            <li><a href="#"><i class="material-icons">notifications</i> <span>Notification</span></a></li>
         </ul>
     </nav>
-    <script src="script.js"></script>
+    <script>
+        let currPage = 3;
+        let furthestPageVisited = 8;
+        let sidebar;
+        let menuBtn;
+        let pageNum;
+        let dropdown;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            sidebar = document.getElementById('sidebar');
+            menuBtn = document.getElementById('menu-btn');
+            let activeDropdown = null; // Track the currently active dropdown
+
+            // Function to set item enabled/disabled
+            function updateMenuItemState() {
+                document.querySelectorAll('.dropdown-menu li, .dropdown > a').forEach(item => {
+                    pageNum = parseInt(item.id.split('-').pop());
+
+                    if (isNaN(pageNum)) {
+                        item.classList.toggle('enabled', furthestPageVisited >= 37);
+                        item.classList.toggle('disabled', furthestPageVisited < 37);
+                    } else {
+                        item.classList.toggle('enabled', furthestPageVisited >= pageNum);
+                        item.classList.toggle('disabled', furthestPageVisited < pageNum);
+                    }
+                });
+            }
+
+            // Toggle sidebar visibility
+            menuBtn.addEventListener('click', () => {
+                sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'block' : 'none';
+                updateMenuItemState(); // Update the item states each time menu is toggled
+            });
+
+            // Dropdown toggle
+            document.querySelectorAll('.dropdown > a').forEach(dropdownLink => {
+                const dropdownIcon = dropdownLink.querySelector('.dropdown-icon');
+                dropdownIcon.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent currPage update if dropdown icon clicked
+                    dropdown = dropdownLink.parentElement;
+
+                    // Close the currently active dropdown if it's open
+                    if (activeDropdown && activeDropdown !== dropdown) {
+                        activeDropdown.classList.remove('active');
+                    }
+
+                    // Toggle the clicked dropdown and set it as active
+                    dropdown.classList.toggle('active');
+                    activeDropdown = dropdown.classList.contains('active') ? dropdown : null;
+                });
+                
+                // Set click event to update currPage if main item is clicked
+                dropdownLink.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const itemId = dropdownLink.querySelector('span').id; // Get main item id
+                    const pageNum = parseInt(itemId.split('-').pop());
+
+                    // Update currPage only if enabled
+                    if (dropdownLink.classList.contains('enabled') && furthestPageVisited >= pageNum) {
+                        currPage = pageNum;
+                        console.log(`The current page number is: ${currPage}`);
+                        sidebar.style.display = 'none'; // Close menu after click
+                    }
+                });
+            });
+
+            // Menu item click handler
+            document.querySelectorAll('.dropdown-menu li').forEach(item => {
+                item.addEventListener('click', function () {
+                    const itemId = this.id;
+                    pageNum = parseInt(itemId.split('-').pop());
+
+                    if (this.classList.contains('disabled')) {
+                        sidebar.style.display = 'none';
+                        return;
+                    }
+
+                    currPage = !isNaN(pageNum) ? pageNum : 37;
+                    console.log(`The current page number is: ${currPage}`);
+                    if (isNaN(pageNum)) {
+                        console.log(`The page type to be set is: ${itemId.split('-').pop()}`);
+                    }
+
+                    sidebar.style.display = 'none';
+                });
+            });
+
+            // Initialize menu item states based on furthestPageVisited
+            updateMenuItemState();
+        });
+    </script>
 </body>
 </html>
